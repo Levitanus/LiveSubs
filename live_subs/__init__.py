@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 # Create a new SocketIO instance
 socketio = SocketIO(app)
-song_list = SongList(Path("/home/levitanus/gits/LiveSubs/backend/songs"))
+song_list = SongList(Path("./songs"))
 song: Song = song_list.current_song()
 
 
@@ -141,4 +141,4 @@ def handle_disconnect():
 
 # Run the application
 if __name__ == '__main__':
-    socketio.run(app, allow_unsafe_werkzeug=True, host="192.168.0.6")
+    socketio.run(app, allow_unsafe_werkzeug=True)
