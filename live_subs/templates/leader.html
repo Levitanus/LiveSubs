@@ -1,0 +1,78 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Live Subs Leader</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+</head>
+<body>
+    <div class="header">
+        <button id="prev_song" class="button-12">← prev</button>
+        <select id="songList" class="song-title button-12" style="width: 60%"> 
+            {% for song in song_list %}
+            <option value="{{ song }}">{{ song }}</option>
+            {% endfor %}
+        </select>
+        <button id="next_song" class="button-12" >next →</button>
+    </div>
+    <div class="songline-container">
+        <p id="line", class="song-line">{{ current_line }}</p>
+    </div>
+    <div class="switches">
+        <button id="prev", class="button-12 switch" >← prev</button>
+        <button id="next", class="button-12 switch" >next →</button>
+    </div>
+
+    <script>
+        // Establish a connection to the server
+        var socket = io();
+        socket.emit("language", "Русский");
+
+        socket.on('current_line', function(line) {
+            // Append the message to the chat log
+            document.getElementById('line').textContent=line;
+        });
+
+        document.getElementById('next').addEventListener('click', function() {
+            socket.emit('next_line');
+        });
+         document.getElementById('prev').addEventListener('click', function() {
+            socket.emit('prev_line');
+        });
+        document.getElementById('next_song').addEventListener('click', function() {
+            socket.emit('next_song');
+            var title = document.getElementById('songList');
+            if (title.selectedIndex < title.length-1) 
+                {
+                    title.selectedIndex += 1;
+                    title.change();
+                }
+        });
+         document.getElementById('prev_song').addEventListener('click', function() {
+            socket.emit('prev_song');
+            var title = document.getElementById('songList');
+            if (title.selectedIndex > 0) 
+                {
+                    title.selectedIndex -= 1;
+                    title.change();
+                }
+        });
+        document.getElementById('songList').addEventListener('change', function() {
+            var song = document.getElementById('songList').value;
+            socket.emit('get_song', song);
+        });
+
+        window.addEventListener('keydown', function(event) {
+            if (event.keyCode === 33 || event.keyCode === 37) {
+                document.getElementById('prev').click();
+            }
+            if (event.keyCode === 34 || event.keyCode === 39) {
+                document.getElementById('next').click();
+            }
+          
+        });
+    </script>
+</body>
+</html>
