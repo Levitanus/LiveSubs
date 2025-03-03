@@ -9,6 +9,7 @@ app = Flask(__name__)
 
 # Create a new SocketIO instance
 socketio = SocketIO(app)
+socketio.init_app(app, cors_allowed_origins="*")
 song_list = SongList(Path("./songs"))
 song: Song = song_list.current_song()
 
@@ -130,6 +131,7 @@ def language(lang):
 # Define a function to handle user connections
 @socketio.on('connect')
 def handle_connect():
+    # raise ConnectionError(f"someone is connected! {request}")
     clients[request.sid] = Client()
 
 
@@ -141,4 +143,4 @@ def handle_disconnect():
 
 # Run the application
 if __name__ == '__main__':
-    socketio.run(app, allow_unsafe_werkzeug=True)
+    socketio.run(app)
