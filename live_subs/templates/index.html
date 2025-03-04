@@ -26,7 +26,7 @@
             // Append the message to the chat log
             var textLine = document.getElementById('line');
             textLine.textContent=line;
-            textLine.innerHTML = textLine.innerHTML.replace(/\n/, '<br />');
+            textLine.innerHTML = textLine.innerHTML.replace(/\n/g, '<br>');
         });
         socket.on('current_song_title', function(title) {
             // Append the message to the chat log
