@@ -96,7 +96,7 @@ def next_line():
     # Emit a message to all connected clients
     line = song.next_line()
     if line is None:
-        return
+        return next_song()
     for sid, client in clients.items():
         emit('current_line', line[client.language], to=sid)
 
@@ -107,7 +107,7 @@ def prev_line():
     # Emit a message to all connected clients
     line = song.previous_line()
     if line is None:
-        return
+        return prev_song()
     for sid, client in clients.items():
         emit('current_line', line[client.language], to=sid)
 
