@@ -9,7 +9,7 @@
       "LSP": {
          "LSP-pyright": {
             "settings": {
-               "venvPath": "${project_path}/backend/venv/bin/python",
+               "venvPath": "${project_path}/live_subs/venv/bin/python",
             }
          }
       }
@@ -17,7 +17,7 @@
    "build_systems": [
         {
             "name": "python_livesubs",
-            "cmd": ["${project_path}/backend/venv/bin/python","-u", "$file"],
+            "cmd": ["${project_path}/live_subs/venv/bin/python","-u", "$file"],
             "selector": "source.python",
             "file_regex": "^\\s*File \"(...*?)\", line ([0-9]*)"
         }
