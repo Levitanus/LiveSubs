@@ -68,6 +68,10 @@ a {
     margin: 0;
 }
 
+br{
+    margin-bottom: 1em;
+}
+
 .songline-container{
     width: 80%;
     padding: 10%;

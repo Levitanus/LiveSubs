@@ -24,7 +24,9 @@
 
         socket.on('current_line', function(line) {
             // Append the message to the chat log
-            document.getElementById('line').textContent=line;
+            var textLine = document.getElementById('line');
+            textLine.textContent=line;
+            textLine.innerHTML = textLine.innerHTML.replace(/\n/, '<br />');
         });
         socket.on('current_song_title', function(title) {
             // Append the message to the chat log
