@@ -4,8 +4,8 @@
 
 Leader view:
 
-![alt text](https://github.com/Levitanus/LiveSubs/blob/main/leader.jpg?raw=true)
+<img src="https://github.com/Levitanus/LiveSubs/blob/main/leader.jpg" height="350" title="Leader view">
 
 Client view:
 
-![alt text](https://github.com/Levitanus/LiveSubs/blob/main/client.jpg?raw=true)
+<img src="https://github.com/Levitanus/LiveSubs/blob/main/client.jpg" height="350" title="Client view">
